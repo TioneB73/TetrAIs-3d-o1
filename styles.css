@@ -1,0 +1,1116 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #000;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+ }
+}
+.ui-element,
+.bonus-challenge, 
+.bonus-reward,
+#statusBar, 
+#message-box, 
+#unlock-message, 
+#game-paused, 
+#game-over, 
+#score-point-message,
+.settings-action-button {
+  user-select: none;          
+  -webkit-user-select: none;  
+  -moz-user-select: none;     
+  -ms-user-select: none;      
+  pointer-events: auto; 
+  z-index: 1;
+}
+
+.game-column canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+}
+
+.game-column, .table-column {
+  transition: all 0.3s ease;
+}
+@media (min-width: 600px) {
+  .game-column {
+    flex: 1 1 75%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .table-column {
+    flex: 1 1 25%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  #pauseButton,
+  .rotate-control,
+  .zoom-control,
+  #settingsButton {
+    display: none;
+  }
+ 
+  .game-rotate-btn{
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+}
+
+.next-piece-preview {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 10px;
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  height: 70px;
+}
+.next-piece-preview h3 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+ }
+#next-piece-container {
+  margin: 10px;
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#scoreboard {
+  display: block;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 15px 25px;
+  font-size: 24px;
+}
+#statusBar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  gap: 10px;
+  z-index: 200;
+}
+#statusLeft, #statusRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 33%;
+}
+#statusLeft {
+  position: relative;
+  right: 10px; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 33%;
+}
+ #statusRight {
+  position: relative;
+  width: 33%;
+ }
+#statusCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+#gridProgressBar, #highScoreBar, #gameSpeedBar, #pieceCounterBar {
+ position: relative;
+  width: 100%;
+  height: 20px;   
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  overflow: hidden; 
+}
+#highScoreList,
+#logHighScoreList {
+  text-align: left;
+  padding-left: 20px; 
+}
+
+#highScoreList li,
+#logHighScoreList li {
+  margin-bottom: 10px;
+}
+
+#highScoreList {
+  text-align: left;
+  padding-left: 20px; 
+}
+#highScoreList li {
+  margin-bottom: 10px;
+}
+
+#pieceCounterFill, #gameSpeedFill, #gridProgressFill, #highScoreFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, green 60%, orange , red);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transition: width 0.3s ease;
+}  
+#highScoreFill {
+  background: linear-gradient(to right, red, orange, green);
+}
+ #pieceCounterText, #gameSpeedText, #gridProgressText, #highScoreText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Agency FB;
+  font-size: 12px;
+  background: linear-gradient(45deg,  black, darkgrey, lightgray, darkgrey, black);
+  background-size: 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 3s ease infinite;
+  pointer-events: none;
+}
+.table-column table {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  border-radius: 10px !important; 
+}
+#controlTable { 
+  margin-top: 5px;
+  height: 25%;    
+  position: relative;
+  z-index: 999;
+}
+
+
+.game-rotate-btn ,
+#controlTable button {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+.game-rotate-btn i,
+#controlTable button i {
+  background: linear-gradient(45deg, magenta, cyan, yellow, lime, red);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s ease infinite; 
+}
+/**/
+
+.game-rotate-btn ,
+#controlTable button {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.game-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.game-rotate-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Rotation styles */
+.game-rotate-y svg {
+  transform: rotate(-90deg);
+}
+
+.game-rotate-z svg {
+  transform: rotate(135deg);
+}
+/* White color when button is clicked */
+.game-rotate-btn:active svg path {
+  fill: white !important;
+}
+.game-rotate-x:hover,
+.game-rotate-x:active {
+  background-color: rgba(255, 56, 56, 0.7); /* Red */
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 56, 56, 0.9);
+}
+.game-rotate-y:hover,
+.game-rotate-y:active {
+  background-color: rgba(5, 255, 5, 0.7); /* Green */
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(5, 255, 5, 0.9);
+}
+.game-rotate-z:hover,
+.game-rotate-z:active {
+  background-color: rgba(56, 255, 255, 0.7); 
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(56, 255, 255, 0.9);
+}
+
+.pause-button:hover,
+.pause-button:active {
+ background-color: rgba(255, 56, 56, 0.7); /* Red */
+ transform: scale(1.1);
+ box-shadow: 0 0 10px rgba(255, 0, 255, 0.9);
+}
+
+#DropPieceButton:hover,
+#DropPieceButton:active {
+  background-color: rgba(255, 0, 255, 0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.9);
+}
+#settingsButton:hover,
+#settingsButton:active {
+  background-color: rgba(255, 255, 0, 0.7); 
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.9);
+}
+#controlTable button:hover,
+#controlTable button:active { 
+  transform: scale(1.1);  
+}
+#moveUpLeftButton:hover,
+#moveUpLeftButton:active { background-color: rgba(130, 255, 30, 0.7);   
+  box-shadow: 0 0 10px rgba(130, 255, 30, 0.9); }
+#moveUpButton:hover,
+#moveUpButton:active { background-color: rgba(0, 255, 0, 0.7);   
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.9); }
+#moveUpRightButton:hover,
+#moveUpRightButton:active {background-color: rgba(130, 255, 130, 0.7);   
+  box-shadow: 0 0 10px rgba(130, 255, 130, 0.9); }
+#moveLeftButton:hover,
+#moveLeftButton:active { background-color: rgba(255, 255,122, 0.7); 
+  box-shadow: 0 0 10px rgba(255, 255, 122, 0.9); } 
+#moveRightButton:hover,
+#moveRightButton:active { background-color: rgba(255, 56, 255, 0.7); 
+  box-shadow: 0 0 10px rgba(255, 56, 255, 0.9); }
+#moveWButton:hover,
+#moveWButton:active { 
+  background-color: rgba(255, 56, 56, 0.7); /* Red */
+  box-shadow: 0 0 10px rgba(255, 56, 56, 0.9); }
+#moveDownLeftButton:hover,
+#moveDownLeftButton:active {  background-color: rgba(155, 255, 155, 0.7); 
+  box-shadow: 0 0 10px rgba(155, 255, 155, 0.9); }
+#moveDownButton:hover,
+#moveDownButton:active {background-color: rgba(56, 255, 255, 0.7); 
+  box-shadow: 0 0 10px rgba(56, 255, 155, 0.9); }
+#moveDownRightButton:hover,
+#moveDownRightButton:active {  background-color: rgba(155, 155, 255, 0.7); 
+  box-shadow: 0 0 10px rgba(155, 155, 255, 0.9); }
+#moveUpLeftButton { border-top-left-radius: 100%; }
+#moveUpRightButton { border-top-right-radius: 100%; }
+#moveDownLeftButton { border-bottom-left-radius: 100%; }
+#moveDownRightButton { border-bottom-right-radius: 100%; }
+.rotate-45 { transform: rotate(45deg); }
+
+
+.settings-box,
+.next-piece-preview,
+#variableInfo {
+  color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: rgba(85, 85, 85, 0.2);
+  border: 2px solid #ffffff;
+  border-radius: 10px;}
+.settings-box {
+  position: relative;
+  overflow-y: auto;
+  min-height: 50%;
+}
+
+
+.select-arrow,
+.music-track-select,
+#scoreboard,
+.next-piece-preview h3,
+#message-box h2,
+#message-box p,
+.text-grad {
+  font-family: 'TetrisMania';
+  font-weight: bold;
+  background: linear-gradient(45deg, magenta, cyan, yellow, lime, red);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s ease infinite; 
+}
+#music-settings-container {
+  font-size: 12px;  
+  margin-top: 5px;
+  width: auto;
+  min-height: 33.33vh;  
+  overflow-y: auto;
+  text-align: left; 
+ z-index: 100;  
+  pointer-events: auto
+}
+#music-settings-container #tutorial-music {
+  display: block !important;
+}
+
+#controlGrid {  
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 10px;                        
+  justify-content: center;               
+  align-items: left;                   
+  margin-right: 30px;    
+}
+.control-cell {  
+  font-size: 14px;  
+  text-align: center;
+}
+.full-width {  
+  grid-column: 1 / -1;
+  text-align: center;
+}
+.settings-section {   
+ font-size: 12px;  
+ text-align: left; 
+ min-height: 15%;
+ overflow-y: auto;  
+}
+.settings-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* or space-between, etc. */
+  gap: 10px; /* optional spacing between buttons */
+}
+.settings-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust the gap between sliders as desired */
+}
+
+.settings-controls label {
+  display: flex;
+  flex-direction: column;
+}
+.settings-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.settings-table td {
+  padding: 5px;
+}
+
+#message-box button,
+#unlock-message button,
+#game-over button,
+.settings-action-button {
+  position: relative;
+  top: 1px;
+  left: 45%;
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid #4CAF50;
+  border-radius: 50%;
+  color: cyan;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+#message-box button:active,
+#game-over button:active,
+#unlock-message button:active,
+.settings-action-button:active {
+  background-color: rgba(5, 255, 5, 0.6); 
+  transform: scale(1.1);
+  color: lightgrey;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+#message-box button:hover,
+#game-over button:hover,
+#unlock-message button:hover,
+.settings-action-button:hover {
+  background-color: rgba(5, 255, 5, 0.6); 
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+.zoom-control,
+.rotate-control {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.rotate-control.active {
+  background-color: rgba(5, 255, 5, 0.7); /* Green */
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.zoom-control {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  
+}
+.rotate-control:hover,
+.zoom-control:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.zoom-control.active {
+background-color: rgba(56, 255, 255, 0.7); 
+ transform: scale(1.21);
+ box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+}
+#tutorial-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#tutorial-tab {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+#tutorial-content {
+  background-color: #222;
+  padding: 30px;
+  border-radius: 10px;
+  color: #00ffff;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+  
+}
+.settings-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.music-select-wrapper {
+  position: relative;
+  display: inline-block;
+  
+}
+.tutorial-tab-content,
+.tutorial-tab,
+.difficulty-option,
+#dropSettings,
+.tutorial-content,
+.music-track-select {
+  font-size: 14px; 
+  font-family: 'TetrisMania';
+  font-weight: bold;
+  background: linear-gradient(45deg, magenta, cyan, yellow, lime, red);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s ease infinite; 
+}
+.music-track-select option:checked {
+  
+  
+}
+
+.music-track-select {
+  
+ 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 30px; /* Space for arrow */
+  
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  color: #4CAF50;
+  font-size: 14px;
+}
+
+.music-track-select:hover,
+.music-track-select.active {
+  background-color: rgba(5, 255, 5, 0.5); /* Green */
+  transform: scale(1.1) ;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+#tutorial-tabs {
+  display: flex;
+  border-bottom: 1px solid #444;
+  margin-bottom: 10px;
+}
+.tutorial-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.tutorial-tab.active {
+  background:rgba(5, 255, 5, 0.1);
+  font-weight: bold;
+}
+.tutorial-tab-content {
+  display: none;
+  padding: 10px;
+ 
+}
+.tutorial-tab-content.active {
+  display: block;
+}
+.tutorial-content,
+
+#tutorial-content h2 {
+  margin-top: 0;
+}
+
+#tutorial-content p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+#tutorial-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#difficultySettings {
+  margin-top: 20px;
+}
+
+.difficulty-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.difficulty-option input[type="radio"] {
+  margin-right: 10px;
+}
+
+.difficulty-option label {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.difficulty-option label i {
+  margin-right: 5px;
+}
+
+#dropSettings {
+  
+}
+
+#dropSettings label {
+  
+  cursor: pointer;
+}
+.welcome-container {
+  position: relative;
+  display: inline-block; /* Ensures the div fits the content */
+  width: 100%;
+  max-width: 600px; /* Adjust as needed */
+  margin: 20px auto;
+}
+
+.welcome-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.overlay-animation {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%); 
+  width: 80%;
+  max-width: 250px;
+  pointer-events: none; 
+}
+.high-score-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.high-score-image {
+  width: 100%;
+  max-width: 500px; 
+  margin-bottom: 15px;  
+}
+.controls-image {
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  display: block;
+  margin: 0 auto 15px; /* Centers image & adds spacing below */
+}
+.controls-image-container {
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ff0000, #ffff00);
+  background-size: 400% 400%;
+  animation: gradientMove 6s ease infinite;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.controls-image {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+}
+
+
+.unlock-animation {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 16x;
+  padding: 20px 40px;
+  border-radius: 10px;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+
+#message-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; 
+  display: none;
+  width: 80%;
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+  pointer-events: auto; 
+}
+#message-box h2 {
+  font-size: 40px;
+}
+
+#message-box p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+#message-box input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  margin-bottom: 20px;
+  text-align: center;
+  background: #fff;
+  color: #000;
+  outline: none; 
+  pointer-events: auto; 
+}
+
+#game-over {
+  flex-direction: column;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+
+#unlock-message,
+#game-over, #game-paused {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  padding: 0px; 
+  transform: translate(-50%);
+  z-index: 200;
+  display: none;
+  height: flex;
+  max-height: 70%;
+  width: 50%;
+  max-width: 70%;
+  background: rgba(0, 0,0, 0.8);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+}
+#message-box h2,#message-box p,
+#unlock-message p, #unlock-message h2,
+#game-paused .game-paused-message, 
+#game-over .game-over-message {
+  font-size: 38px;
+  font-family: 'TetrisMania';
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(45deg, magenta, cyan, yellow, lime, red);
+  background-size: 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 5s ease infinite;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+#unlock-message p {
+  font-size: 32px;
+}
+#unlock-message h2 {
+  font-size: 24px;
+}
+#score-point-message {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: flex;
+  height: 15%;
+  max-height: 30%;
+  transform: translate(-50%);
+  z-index: 200;
+  display: none;
+  height: flex;
+  text-align: center;
+}
+.bonus-challenge, .bonus-reward {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  height: flex;
+  max-height: 70%;
+  width: flex;
+  max-width: 200px;
+  transform: translateX(-50%);
+  padding: 15px 20px;
+  border: 2px solid #fff;
+  border-radius: 10px; 
+  z-index: 200;
+  color: #fff;
+  font-size: 14px;  
+  font-family: 'TetrisMania';
+  font-weight: bold;
+  background: linear-gradient(45deg, magenta, cyan, yellow, lime, red);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s ease infinite; 
+ 
+  text-align: center;
+  display: none; 
+}
+.bonus-gif {
+  width: 100px;
+  height: auto;
+  margin-top: 10px;
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5) translate(-50%, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-zoom-in {
+  animation: zoomIn 0.5s ease-out forwards;
+}
+@keyframes rotateCW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); }
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+
+
+@media only screen and (max-width: 949px) {
+  body, html {
+    overflow-x: hidden;
+  }
+   .table-column {
+    display: none;
+  }
+  .container {
+    height: 100vh;
+    flex-direction: column;
+  }
+  .game-column {
+    width: 100%;
+    height: 95vh;
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+   .floatable-container {
+    pointer-events: auto;
+    position: absolute;
+    z-index: 9999;
+    cursor: grab;
+  }
+  .control-section {
+    flex: 1;
+  }
+  button {
+  touch-action: manipulation !important;
+}
+  .rotate-control,
+  .zoom-control {
+    bottom: 20px;
+    width: 70px;
+    height: 70px;
+  }
+  .control-table-btn,
+  .settings-button,
+  .settings-action-button,
+  .game-rotate-btn {
+    pointer-events: auto !important;
+    user-select: none;          
+    -webkit-user-select: none;  
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    z-index: 1;
+  }
+  .game-rotate-btn { 
+    display: block !important;
+    position: relative;  
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;    
+  } 
+  #rotate-buttons-float {
+    top: 10px;
+    right: 10px;
+  }
+  #mobile-control-container {
+     position: absolute;
+     left: 10px;
+     top: 35%; 
+     transform: translateY(-50%);
+     z-index: 150;     
+  }
+  #mobile-control-container td {
+     
+  }
+   #mobile-control-container button {    
+   width: 60px!important;  
+   height: 60px !important;     
+  }
+}
+/* Consistent active feedback for all interactive buttons */
+.active-btn {
+  transform: scale(1.2) !important;
+  background-color: rgba(255,255,255,0.4) !important;
+  box-shadow: 0 0 15px rgba(255,255,255,0.9) !important;
+}
+
+/* Specific button active colors (will override general active-btn bg color) */
+.game-rotate-x.active-btn {
+  background-color: rgba(255, 56, 56, 0.7) !important;
+}
+
+.game-rotate-y.active-btn {
+  background-color: rgba(5, 255, 5, 0.7) !important;
+}
+
+.game-rotate-z.active-btn {
+  background-color: rgba(56, 255, 255, 0.7) !important;
+}
+
+#DropPieceButton.active-btn {
+  background-color: rgba(255, 0, 255, 0.7) !important;
+}
+
+#settingsButton.active-btn {
+  background-color: rgba(255, 255, 0, 0.7) !important;
+}
+
+/* Control-table buttons specific colors */
+#moveUpLeftButton.active-btn { background-color: rgba(130, 255, 30, 0.7) !important; }
+#moveUpButton.active-btn { background-color: rgba(0, 255, 0, 0.7) !important; }
+#moveUpRightButton.active-btn { background-color: rgba(130, 255, 130, 0.7) !important; }
+#moveLeftButton.active-btn { background-color: rgba(255, 255,122, 0.7) !important; } 
+#moveRightButton.active-btn { background-color: rgba(255, 56, 255, 0.7) !important; }
+#moveWButton.active-btn { background-color: rgba(255, 56, 56, 0.7) !important; }
+#moveDownLeftButton.active-btn { background-color: rgba(155, 255, 155, 0.7) !important; }
+#moveDownButton.active-btn { background-color: rgba(56, 255, 255, 0.7) !important; }
+#moveDownRightButton.active-btn { background-color: rgba(155, 155, 255, 0.7) !important; }
+
+/* Active icons explicitly become light grey */
+.active-btn svg path,
+.active-btn i {
+  fill: lightgrey !important;
+  color: lightgrey !important;
+}
+@media (max-width: 600px) {
+  #pieceCounterBar,
+  #gridProgressBar,
+  #gameSpeedBar,
+  #highScoreBar {
+    top: -50px;
+    left: 40%;
+    display: flex;    
+    
+    transform: rotate(90deg);
+    transform-origin: top left;
+    width:170px;
+    height: 25px;
+    margin-bottom: 10px;
+    gap:10px; 
+  }
+   #pieceCounterBar {
+    top: 0px;
+    left: 90%;
+  }
+  #gridProgressBar {
+    top: -50px;
+    left: 40%;
+  }
+  #gameSpeedBar {
+    top: 0px;
+    left: 90%;
+  }
+ #pieceCounterText, #gameSpeedText, #gridProgressText, #highScoreText {
+ font-size: 18px;  
+}
+ #scoreboard { 
+  font-size: 48px;
+ }
+}
+  
+/* Multiplayer Info Styling */
+#multiplayer-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 300;
+  color: #fff;
+  font-family: 'TetrisMania';
+  font-size: 18px;
+}
+#multiplayer-info img {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
